@@ -1,4 +1,7 @@
-FROM ubuntu:14.04.3
+FROM phusion/baseimage:0.9.19
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
 
 RUN apt-get update && \
     apt-get upgrade -y --no-install-recommends && \
@@ -13,12 +16,13 @@ RUN apt-get update && \
     python \
     python-pyasn1 \
     python-rpm \
-    libicu52 \
-    libglibmm-2.4-1c2a \
+    libicu55 \
+    libglibmm-2.4-1v5 \
     apt-utils \
     libxml2 \
     dmidecode \
-    git && \
+    git \
+    rsyslog && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root
@@ -39,7 +43,10 @@ RUN chmod +x /usr/sbin/waagent && \
 
 RUN dpkg --install --force-confold --force-confdef omi-1.0.8-3.universald.1.x64.deb && \
     dpkg --install --force-confold --force-confdef scx-1.6.2-104.universald.1.x64.deb
-
+    
+    
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENTRYPOINT /entrypoint.sh
 
