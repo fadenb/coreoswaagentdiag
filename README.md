@@ -1,14 +1,18 @@
-# coreoswaagentdiag
+# waagent-phusion-docker
 
-This is an image based on ubuntu 14.04.3 with
-[WALinuxAgent](https://github.com/Azure/WALinuxAgent)
-and embedded
-[LinuxDiagnostic](https://github.com/Azure/azure-linux-extensions/)
-extension to run on coreos.
+This image is based on the work done by @colrack available at
+https://github.com/colrack/coreoswaagentdiag/
 
-See this [issue](https://github.com/Azure/azure-linux-extensions/issues/66) for more info.
+This image is based on the [phusion docker baseimage](https://phusion.github.io/baseimage-docker/)
 
-WA 2.0.15 + linuxdiag 2.2 was tested on coreos 835.x.x
+It is used to run [WALinuxAgent](https://github.com/Azure/WALinuxAgent) and
+embedded [LinuxDiagnostic](https://github.com/Azure/azure-linux-extensions/)
+extension on non supported distributions.
+
+See this [issue](https://github.com/Azure/azure-linux-extensions/issues/66) for
+more info.
+
+WA 2.0.15 + linuxdiag 2.3 was tested on NixOS 16.09
 
 1. boot the machine
 2. stop systemd waagent service
@@ -18,8 +22,8 @@ WA 2.0.15 + linuxdiag 2.2 was tested on coreos 835.x.x
 
 ### Build
 
-`docker build -t coreoswaagentdiag` .
+`docker build -t waagent-phusion-docker` .
 
 ### Run
 
-`docker run --name coreoswaagentdiag --privileged --net=host --ipc=host --pid=host -v=/dev:/host/dev -v=/etc/ssh:/etc/ssh -v=/lib/modules:/lib/modules -v=/lib/firmware:/lib/firmware -v=/mnt:/mnt -v=/var/run:/var/run -d -v=/var/lib/waagent:/var/lib/waagent -v=/var/log:/var/log -v=/sys/fs/cgroup:/sys/fs/cgroup:ro coreoswaagentdiag`
+`docker run --name waagent-phusion-docker --privileged --net=host --ipc=host --pid=host -v=/dev:/host/dev -v=/etc/ssh:/etc/ssh -v=/lib/modules:/lib/modules -v=/lib/firmware:/lib/firmware -v=/mnt:/mnt -v=/var/run:/var/run -d -v=/var/lib/waagent:/var/lib/waagent -v=/var/log:/var/log -v=/sys/fs/cgroup:/sys/fs/cgroup:ro waagent-phusion-docker`
