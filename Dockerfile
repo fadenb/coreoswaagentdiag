@@ -1,4 +1,4 @@
-FROM FROM ubuntu:14.04.3
+FROM ubuntu:14.04.3
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
