@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.19
+FROM FROM ubuntu:14.04.3
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
@@ -16,8 +16,8 @@ RUN apt-get update && \
     python \
     python-pyasn1 \
     python-rpm \
-    libicu55 \
-    libglibmm-2.4-1v5 \
+    libicu52 \
+    libglibmm-2.4-1c2a \
     apt-utils \
     libxml2 \
     dmidecode \
